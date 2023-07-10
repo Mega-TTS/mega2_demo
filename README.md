@@ -25,6 +25,7 @@ Zero-shot text-to-speech aims at synthesizing voices with unseen speech prompts.
       <th align="center"><strong>YourTTS</strong></th>
       <th align="center"><strong>VALL-E</strong></th>
       <th align="center"><strong>Mega-TTS</strong></th>
+      <th align="center"><strong>Mega-TTS 2</strong></th>
     </tr>
   </thead>
   <tbody>
