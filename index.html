@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="MegaTTS 2:  Zero-Shot Text-to-Speech with Arbitrary Length Speech Prompts.">
+  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MegaTTS 2</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">MegaTTS 2:  Zero-Shot Text-to-Speech with Arbitrary Length Speech Prompts</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=wDgSBssAAAAJ&hl=en">Ziyue Jiang</a><sup>1,2</sup>,</span>
+            <span class="author-block">
+              <a href="https://silentlin15.github.io/">Jinglin Liu</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="https://rayeren.github.io/">Yi Ren</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=tsQVykcAAAAJ&hl=en&oi=ao">Jinzheng He</a><sup>1,2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?hl=en&user=eBBFeVcAAAAJ">Chen Zhang</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?hl=en&user=I1XtkC4AAAAJ">Zhenhui Ye</a><sup>1,2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?hl=en&user=8nYLnUsAAAAJ">Pengfei Wu</a><sup>2</sup>
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?hl=en&user=wPHfG5wAAAAJ">Chunfeng Wang</a><sup>2</sup>
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?hl=en&user=e6_J-lEAAAAJ">Xiang Yin</a><sup>2</sup>
+            </span>
+            <span class="author-block">
+              <a href="https://www.linkedin.com/in/%E6%B3%BD%E5%90%9B-%E9%A9%AC-b05179202">Zejun Ma</a><sup>2</sup>
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?hl=en&user=IIoFY90AAAAJ">Zhou Zhao</a><sup>1</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Zhejiang University,</span>
+            <span class="author-block"><sup>2</sup>ByteDance</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>Paper Coming Soon</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-play"></i>
+                  </span>
+                  <span>Demo Coming Soon</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<section class="section" style="padding-top: 0px;">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Zero-shot text-to-speech aims at synthesizing voices with unseen speech prompts. 
+            Previous large-scale multispeaker TTS models, have successfully achieved this goal with an enrolled recording within 10 seconds. 
+            However, most of them are designed to utilize only short speech prompts. 
+            The limited information in short speech prompts significantly hinders the performance of fine-grained identity imitation. 
+          </p>
+          <p>
+            In this paper, we introduce Mega-TTS 2, a generic zero-shot multispeaker TTS model that is capable of 
+            synthesizing speech for unseen speakers with arbitrary-length prompts. 
+            Specifically, we 1) design a multi-reference timbre encoder to extract timbre information from multiple reference speeches;
+            2) and train a prosody language model with arbitrary-length speech prompts;
+            With these designs, our model is suitable for prompts of different lengths, which extends the upper bound of speech quality for zero-shot text-to-speech.
+            Besides arbitrary-length prompts, we introduce arbitrary-source prompts, which leverages the probabilities
+            derived from multiple P-LLM outputs to produce expressive and controlled prosody.
+            Furthermore, we propose a phoneme-level auto-regressive duration model to introduce in-context learning capabilities to duration modeling.
+          </p>
+          <p>
+            Experiments demonstrate that our method could not only synthesize identity-preserving speech with a short prompt
+            of an unseen speaker but also achieve improved performance with longer speech prompts.
+            Audio samples can be found in this demo page.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="./static/images/megatts_arch.png"
+                 class="interpolation-image"
+                 alt="Interpolate start reference image."/>
+      <h2 class="subtitle has-text-centered">
+        The overall architecture of Mega-TTS 2. MRTE denotes the multi-reference timbre encoder and GE denotes the global timbre encoder. Subfigure (c) illustrates the training process of the prosody language model (PLM), which generates the prosody latent code extracted from random sentences of the same speaker in an auto-regressive manner. We train the auto-regressive duration model (ADM) in the same way as PLM, but we use mean squared error loss instead.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title is-3">Cloning Our Voices</h2>
+          <div class="content">
+            <p>
+              <span><i class="far fa-hand-peace fa-lg"></i></span> Hey! We are the authors of Mega-TTS 2! Here we clone our voices in a zero-shot manner with MegaTTS 2.
+            </p>
+            <div class="has-text-left">
+              <p>
+                <h4>Transcriptions:</h4>
+                <li>ZH 1: 我们主要提供装修的服务，您有装修方面的需求吗？</li>
+                <li>ZH 2: 您看，您这个行业的很多客户，都通过线上推广实现销量增长了。</li>
+                <li>ZH 3: 嗯那麻烦问一下，您这边是做什么行业的呢？</li>
+                <li>ZH 4: 非常抱歉，也就是想了解一下您有多大的可能会将我们的广告服务推荐给其他人？</li>
+                <li>ZH -> EN 1: "If there are any idiots in the room, will they please stand up", said the sarcastic teacher.</li>
+                <li>ZH -> EN 2: After a long silence, one freshman rose to his feet.</li>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="columns is-centered has-text-centered  is-full-width">
+        <table class="table" style="background-color: transparent;">
+          <thead>
+            <tr>
+              <th align="center"><strong><span class="icon"><i class="fas fa-hiking"></i></span>Name</strong></th>
+              <th align="center"><strong><span class="icon"><i class="fas fa-microphone"></i></span>Prompt</strong></th>
+              <th align="center"><strong>ZH 1</strong></th>
+              <th align="center"><strong>ZH 2</strong></th>
+              <th align="center"><strong>ZH 3</strong></th>
+              <th align="center"><strong>ZH 4</strong></th>
+              <th align="center"><strong>ZH->EN 1</strong></th>
+              <th align="center"><strong>ZH->EN 2</strong></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="28%" style="text-align: center;"><p>Ziyue Jiang</p></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/our_voices/jzy/prompt.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/our_voices/jzy/1.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/our_voices/jzy/2.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/our_voices/jzy/3.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/our_voices/jzy/4.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/our_voices/jzy/zh_to_en_1.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/our_voices/jzy/zh_to_en_2.wav" type="audio/wav"></audio></td>
+            </tr>
+            <tr>
+              <td width="28%" style="text-align: center;"><p>Jinglin Liu</p></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/our_voices/ljl/prompt.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/our_voices/ljl/1.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/our_voices/ljl/2.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/our_voices/ljl/3.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/our_voices/ljl/4.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/our_voices/ljl/zh_to_en_1.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/our_voices/ljl/zh_to_en_2.wav" type="audio/wav"></audio></td>
+            </tr>
+            <tr>
+              <td width="28%" style="text-align: center;"><p>Yi Ren</p></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/our_voices/ry/prompt.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/our_voices/ry/1.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/our_voices/ry/2.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/our_voices/ry/3.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/our_voices/ry/4.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/our_voices/ry/zh_to_en_1.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/our_voices/ry/zh_to_en_2.wav" type="audio/wav"></audio></td>
+            </tr>
+            <tr>
+              <td width="28%" style="text-align: center;"><p>Jinzheng He</p></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/our_voices/hjz/prompt.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/our_voices/hjz/1.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/our_voices/hjz/2.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/our_voices/hjz/3.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/our_voices/hjz/4.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/our_voices/hjz/zh_to_en_1.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/our_voices/hjz/zh_to_en_2.wav" type="audio/wav"></audio></td>
+            </tr>
+            <tr>
+              <td width="28%" style="text-align: center;"><p>Chunfeng Wang</p></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/our_voices/wcf/prompt.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/our_voices/wcf/1.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/our_voices/wcf/2.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/our_voices/wcf/3.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/our_voices/wcf/4.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/our_voices/wcf/zh_to_en_1.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/our_voices/wcf/zh_to_en_2.wav" type="audio/wav"></audio></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Prosody Interpolation</h2>
+          <div class="content">
+            <p>
+              Here we interpolate the prosody information from target speech prompt to source speech prompt with the tempereture &gamma;.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="columns is-centered has-text-centered">
+        <table class="table" style="background-color: transparent;">
+          <thead>
+            <tr>
+              <th align="center"><strong><span class="icon"><i class="fas fa-hiking"></i></span>Name</strong></th>
+              <th align="center"><strong>Source Prompt</strong></th>
+              <th align="center"><strong>Target Prompt</strong></th>
+              <th align="center"><strong>&gamma; = 0</strong></th>
+              <th align="center"><strong>&gamma; = 0.4</strong></th>
+              <th align="center"><strong>&gamma; = 0.8</strong></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="28%" style="text-align: center;"><p>Ziyue Jiang</p></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/prosody_interpolation/jzy/source_prompt.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/prosody_interpolation/jzy/target_prompt.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/prosody_interpolation/jzy/1_0.0.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/prosody_interpolation/jzy/1_0.4.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/prosody_interpolation/jzy/1_0.8.wav" type="audio/wav"></audio></td>
+            </tr>
+            <tr>
+              <td width="28%" style="text-align: center;"><p>Jinzheng He</p></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/prosody_interpolation/hjz/source_prompt.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/prosody_interpolation/hjz/target_prompt.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/prosody_interpolation/hjz/1_0.0.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/prosody_interpolation/hjz/1_0.4.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/prosody_interpolation/hjz/1_0.8.wav" type="audio/wav"></audio></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">LibriSpeech TTS Samples</h2>
+        <div class="content">
+          <p>
+            We list the speech examples used in our subjective evaluations here.
+          </p>
+          <p>
+            In this section, we only use one-sentence speech prompt to compare the speech naturalness of these systems.
+          </p>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th align="center"><strong>Text</strong></th>
+              <th align="center"><strong>Speaker Prompt</strong></th>
+              <th align="center"><strong>Ground Truth</strong></th>
+              <th align="center"><strong>YourTTS</strong></th>
+              <th align="center"><strong>VALL-E</strong></th>
+              <th align="center"><strong>Mega-TTS</strong></th>
+              <th align="center"><strong>Mega-TTS 2</strong></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="38%"><p>He was in deep converse with the clerk and entered the hall holding him by the arm.</p></td>
+              <td width="10%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/zero-shot_TTS/prompt/4.wav" type="audio/wav"></audio></td>
+              <td width="10%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/zero-shot_TTS/gt/4.wav" type="audio/wav"></audio></td>
+              <td width="10%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/zero-shot_TTS/yourtts/4.wav" type="audio/wav"></audio></td>
+              <td width="10%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/zero-shot_TTS/valle/4.wav" type="audio/wav"></audio></td>
+              <td width="10%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/zero-shot_TTS/mega-tts/4.wav" type="audio/wav"></audio></td>
+              <td width="10%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/zero-shot_TTS/mega-tts2/4.wav" type="audio/wav"></audio></td>
+            </tr>
+            <tr>
+              <td width="38%"><p>Yea, his honourable worship is within, but he hath a godly minister or two with him, and likewise a leech.</p></td>
+              <td width="10%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/zero-shot_TTS/prompt/1.wav" type="audio/wav"></audio></td>
+              <td width="10%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/zero-shot_TTS/gt/1.wav" type="audio/wav"></audio></td>
+              <td width="10%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/zero-shot_TTS/yourtts/1.wav" type="audio/wav"></audio></td>
+              <td width="10%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/zero-shot_TTS/valle/1.wav" type="audio/wav"></audio></td>
+              <td width="10%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/zero-shot_TTS/mega-tts/1.wav" type="audio/wav"></audio></td>
+              <td width="10%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/zero-shot_TTS/mega-tts2/1.wav" type="audio/wav"></audio></td>
+            </tr>
+            <tr>
+              <td width="38%"><p>Instead of shoes, the old man wore boots with turnover tops, and his blue coat had wide cuffs of gold braid.</p></td>
+              <td width="10%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/zero-shot_TTS/prompt/2.wav" type="audio/wav"></audio></td>
+              <td width="10%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/zero-shot_TTS/gt/2.wav" type="audio/wav"></audio></td>
+              <td width="10%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/zero-shot_TTS/yourtts/2.wav" type="audio/wav"></audio></td>
+              <td width="10%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/zero-shot_TTS/valle/2.wav" type="audio/wav"></audio></td>
+              <td width="10%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/zero-shot_TTS/mega-tts/2.wav" type="audio/wav"></audio></td>
+              <td width="10%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/zero-shot_TTS/mega-tts2/2.wav" type="audio/wav"></audio></td>
+            </tr>
+            <tr>
+              <td width="38%"><p>The army found the people in poverty and left them in comparative wealth.</p></td>
+              <td width="10%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/zero-shot_TTS/prompt/3.wav" type="audio/wav"></audio></td>
+              <td width="10%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/zero-shot_TTS/gt/3.wav" type="audio/wav"></audio></td>
+              <td width="10%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/zero-shot_TTS/yourtts/3.wav" type="audio/wav"></audio></td>
+              <td width="10%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/zero-shot_TTS/valle/3.wav" type="audio/wav"></audio></td>
+              <td width="10%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/zero-shot_TTS/mega-tts/3.wav" type="audio/wav"></audio></td>
+              <td width="10%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/zero-shot_TTS/mega-tts2/3.wav" type="audio/wav"></audio></td>
+            </tr>
+          </tbody>
+        </table>
+
+
+        <h3 class="title is-4">Expanding the Prompt Length</h3>
+        <div class="content">
+          <p>
+            In this experiment, we illustrate the speech samples generated by our MegaTTS 2 with different prosody prompt length. 
+            Note that if the prompt is less than 10 seconds, we will repeat it to get 10-seconds timbre prompt.
+          </p>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th align="center"><strong>Text</strong></th>
+              <th align="center"><strong>Ground Truth</strong></th>
+              <th align="center"><strong>1 sentence</strong></th>
+              <th align="center"><strong>10 sentences</strong></th>
+              <th align="center"><strong>30 sentences</strong></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="28%"><p>He was in deep converse with the clerk and entered the hall holding him by the arm.</p></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="audio_sample/zero-shot_TTS/prompt/4.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="audio_sample/zero-shot_TTS/gt/4.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="audio_sample/zero-shot_TTS/yourtts/4.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="audio_sample/zero-shot_TTS/valle/4.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="audio_sample/zero-shot_TTS/mega-tts/4.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="audio_sample/zero-shot_TTS/mega-tts2/4.wav" type="audio/wav"></audio></td>
+            </tr>
+            <tr>
+              <td width="28%"><p>Yea, his honourable worship is within, but he hath a godly minister or two with him, and likewise a leech.</p></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="audio_sample/zero-shot_TTS/prompt/1.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="audio_sample/zero-shot_TTS/gt/1.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="audio_sample/zero-shot_TTS/yourtts/1.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="audio_sample/zero-shot_TTS/valle/1.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="audio_sample/zero-shot_TTS/mega-tts/1.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="audio_sample/zero-shot_TTS/mega-tts2/1.wav" type="audio/wav"></audio></td>
+            </tr>
+            <tr>
+              <td width="28%"><p>Instead of shoes, the old man wore boots with turnover tops, and his blue coat had wide cuffs of gold braid.</p></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="audio_sample/zero-shot_TTS/prompt/2.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="audio_sample/zero-shot_TTS/gt/2.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="audio_sample/zero-shot_TTS/yourtts/2.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="audio_sample/zero-shot_TTS/valle/2.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="audio_sample/zero-shot_TTS/mega-tts/2.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="audio_sample/zero-shot_TTS/mega-tts2/2.wav" type="audio/wav"></audio></td>
+            </tr>
+            <tr>
+              <td width="28%"><p>The army found the people in poverty and left them in comparative wealth.</p></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="audio_sample/zero-shot_TTS/prompt/3.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="audio_sample/zero-shot_TTS/gt/3.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="audio_sample/zero-shot_TTS/yourtts/3.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="audio_sample/zero-shot_TTS/valle/3.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="audio_sample/zero-shot_TTS/mega-tts/3.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="audio_sample/zero-shot_TTS/mega-tts2/3.wav" type="audio/wav"></audio></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Concurrent Work. -->
+    <!-- <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Related Links</h2>
+
+        <div class="content has-text-justified">
+          <p>
+            There's a lot of excellent work that was introduced around the same time as ours.
+          </p>
+          <p>
+            <a href="https://arxiv.org/abs/2104.09125">Progressive Encoding for Neural Optimization</a> introduces an idea similar to our windowed position encoding for coarse-to-fine optimization.
+          </p>
+          <p>
+            <a href="https://www.albertpumarola.com/research/D-NeRF/index.html">D-NeRF</a> and <a href="https://gvv.mpi-inf.mpg.de/projects/nonrigid_nerf/">NR-NeRF</a>
+            both use deformation fields to model non-rigid scenes.
+          </p>
+          <p>
+            Some works model videos with a NeRF by directly modulating the density, such as <a href="https://video-nerf.github.io/">Video-NeRF</a>, <a href="https://www.cs.cornell.edu/~zl548/NSFF/">NSFF</a>, and <a href="https://neural-3d-video.github.io/">DyNeRF</a>
+          </p>
+          <p>
+            There are probably many more by the time you are reading this. Check out <a href="https://dellaert.github.io/NeRF/">Frank Dellart's survey on recent NeRF papers</a>, and <a href="https://github.com/yenchenlin/awesome-NeRF">Yen-Chen Lin's curated list of NeRF papers</a>.
+          </p>
+        </div>
+      </div>
+    </div> -->
+    <!--/ Concurrent Work. -->
+
+  </div>
+</section>
+
+
+<!-- <section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{park2021nerfies,
+  author    = {Park, Keunhong and Sinha, Utkarsh and Barron, Jonathan T. and Bouaziz, Sofien and Goldman, Dan B and Seitz, Steven M. and Martin-Brualla, Ricardo},
+  title     = {Nerfies: Deformable Neural Radiance Fields},
+  journal   = {ICCV},
+  year      = {2021},
+}</code></pre>
+  </div>
+</section> -->
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Licenses</h2>
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            Website source code based on the <a
+            href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> project page.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
