@@ -159,3 +159,6 @@ audio{
   width: 100px;
   height: 27px;
 }
+.table td{
+  vertical-align: middle;
+}
