@@ -125,10 +125,10 @@
             In this paper, we introduce Mega-TTS 2, a generic zero-shot multispeaker TTS model that is capable of 
             synthesizing speech for unseen speakers with arbitrary-length prompts. 
             Specifically, we 1) design a multi-reference timbre encoder to extract timbre information from multiple reference speeches;
-            2) and train a prosody language model with arbitrary-length speech prompts;
+            2) and train a prosody language model (PLM) with arbitrary-length speech prompts;
             With these designs, our model is suitable for prompts of different lengths, which extends the upper bound of speech quality for zero-shot text-to-speech.
             Besides arbitrary-length prompts, we introduce arbitrary-source prompts, which leverages the probabilities
-            derived from multiple P-LLM outputs to produce expressive and controlled prosody.
+            derived from multiple PLM outputs to produce expressive and controlled prosody.
             Furthermore, we propose a phoneme-level auto-regressive duration model to introduce in-context learning capabilities to duration modeling.
           </p>
           <p>
@@ -141,37 +141,6 @@
       </div>
     </div>
     <!--/ Abstract. -->
-
-    <div class="columns is-centered has-text-centered">
-      <div class="column">
-        <div class="content">
-          <p class="is-size-5">
-            <span><i class="far fa-play-circle fa-lg"></i></span> Let one of the authors reads the abstract for you!
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="columns is-centered has-text-centered  is-full-width">
-      <table class="table" style="background-color: transparent;">
-        <thead>
-          <tr>
-            <th align="center"><strong>Name</strong></th>
-            <th align="center"><strong>Mode</strong></th>
-            <th align="center"><strong>Prompt</strong></th>
-            <th align="center"><strong>Abstract Reading</strong></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td width="28%" style="text-align: center;"><p>Chen Zhang</p></td>
-            <td width="28%" style="text-align: center;"><p>Zero-Shot</p></td>
-            <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/our_voices/zc/prompt.wav" type="audio/wav"></audio></td>
-            <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/abs/abs_zc.wav" type="audio/wav"></audio></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
 
   </div>
 </section>
