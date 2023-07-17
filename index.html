@@ -37,7 +37,6 @@
   <script defer src="./static/js/fontawesome.all.min.js"></script>
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
-  <script src="./static/js/index.js"></script>
 </head>
 <body>
 
@@ -65,7 +64,7 @@
               <a href="https://scholar.google.com/citations?hl=en&user=I1XtkC4AAAAJ">Zhenhui Ye</a><sup>1,2</sup>,
             </span>
             <span class="author-block">
-              <a href="https://scholar.google.com/citations?hl=en&user=8nYLnUsAAAAJ">Pengfei Wu</a><sup>2</sup>
+              <a href="http://pengfei-wei.com/">Pengfei Wei</a><sup>2</sup>
             </span>
             <span class="author-block">
               <a href="https://scholar.google.com/citations?hl=en&user=wPHfG5wAAAAJ">Chunfeng Wang</a><sup>2</sup>
@@ -129,7 +128,7 @@
             Zero-shot text-to-speech aims at synthesizing voices with unseen speech prompts. 
             Previous large-scale multispeaker TTS models, have successfully achieved this goal with an enrolled recording within 10 seconds. 
             However, most of them are designed to utilize only short speech prompts. 
-            The limited information in short speech prompts significantly hinders the performance of fine-grained identity imitation. 
+            The limited information in short speech prompts hinders the performance of fine-grained identity imitation significantly. 
           </p>
           <p>
             In this paper, we introduce Mega-TTS 2, a generic zero-shot multispeaker TTS model that is capable of 
@@ -147,17 +146,40 @@
             Audio samples can be found in this demo page.
           </p>
         </div>
+        <!-- <div class="card-content">
+          <div class="media">
+            <div class="media-left">
+              <figure class="image is-48x48">
+                <img src="static/images/peter_griffin.png" alt="Placeholder image">
+              </figure>
+            </div>
+            <div class="media-left">
+              <p class="title is-4">Peter Griffin</p>
+              <p class="subtitle is-6"><a href="#">@familyguy</a></p>
+            </div>
+            
+          </div>
+          <div class="content">
+            <div class="media-left">
+              <figure class="image is-48x48">
+                <img src="static/images/peter_griffin.png" alt="Placeholder image">
+              </figure>
+            </div>
+            <p class="subtitle is-6">speech prompt<audio controls="" ><source src="static/audio_sample/abs/abs_peter.wav" type="audio/wav"></audio></p>
+          </div>
+        </div> -->
       </div>
     </div>
     <!--/ Abstract. -->
   </div>
 </section>
 
-<!-- 
+
 <section class="hero teaser">
-  <div class="container is-max-desktop">
+  <div class="container is-max-desktop is-centered has-text-centered">
     <div class="hero-body">
-      <img src="./static/images/megatts_arch.png"
+      <h2 class="title is-3">Model Overview</h2>
+      <img src="./static/images/model_overview.png"
                  class="interpolation-image"
                  alt="Interpolate start reference image."/>
       <h2 class="subtitle has-text-centered">
@@ -165,7 +187,7 @@
       </h2>
     </div>
   </div>
-</section> -->
+</section>
 
 
 <section class="hero is-light is-small">
@@ -185,8 +207,8 @@
                 <li>ZH 2: 您看，您这个行业的很多客户，都通过线上推广实现销量增长了。</li>
                 <li>ZH 3: 嗯那麻烦问一下，您这边是做什么行业的呢？</li>
                 <li>ZH 4: 非常抱歉，也就是想了解一下您有多大的可能会将我们的广告服务推荐给其他人？</li>
-                <li>ZH -> EN 1: "If there are any idiots in the room, will they please stand up", said the sarcastic teacher.</li>
-                <li>ZH -> EN 2: After a long silence, one freshman rose to his feet.</li>
+                <li>ZH -> EN 1: Need a laugh? We found the funniest jokes around to tell all of your friends and family.</li>
+                <li>ZH -> EN 2: You'll be sure to brighten someones day when you unleash a hilarious joke when they least expect it.</li>
               </p>
             </div>
           </div>
@@ -285,7 +307,10 @@
           <h2 class="title is-3">Prosody Interpolation</h2>
           <div class="content">
             <p>
-              Here we interpolate the prosody information from target speech prompt to source speech prompt with the tempereture &gamma;.
+              Here we interpolate the prosody information from Prompt for PLM-1 to Prompt for PLM-2 with the tempereture &gamma;.
+            </p>
+            <p>
+              [*] Please note that the timbre of the synthesized audio here only comes from Prosody Prompt for PLM-1 (target timbre).
             </p>
           </div>
         </div>
@@ -296,13 +321,25 @@
             <tr>
               <th align="center"><strong><span class="icon"><i class="fas fa-hiking"></i></span>Name</strong></th>
               <th align="center"><strong><span class="icon"><i class="fas fa-magic"></i></span>Setting</strong></th>
-              <th align="center"><strong>Source Prompt</strong></th>
-              <th align="center"><strong>Target Prompt</strong></th>
+              <th align="center"><strong>Prosody Prompt for PLM-1 (target timbre)</strong></th>
+              <th align="center"><strong>Prosody Prompt for PLM-2</strong></th>
               <th align="center"><strong>&gamma; = 0</strong></th>
               <th align="center"><strong>&gamma; = 0.8</strong></th>
             </tr>
           </thead>
           <tbody>
+            <tr>
+              <td rowspan="2" width="28%" style="text-align: center;">Ziyue Jiang</td>
+              <td rowspan="2" width="28%" style="text-align: center;"><p>Poem Reading</p></td>
+              <td rowspan="2" width="20%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/prosody_interpolation/jzy/source_prompt.wav" type="audio/wav"></audio></td>
+              <td rowspan="2" width="20%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/prosody_interpolation/jzy/target_prompt.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/prosody_interpolation/jzy/1_flat.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/prosody_interpolation/jzy/1_0.8.wav" type="audio/wav"></audio></td>
+            </tr>
+            <tr>
+              <td width="12%" style="text-align: center;border-bottom-width: 1px;"><audio controls="" ><source src="static/audio_sample/prosody_interpolation/jzy/2_flat.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;border-bottom-width: 1px;"><audio controls="" ><source src="static/audio_sample/prosody_interpolation/jzy/2_0.8.wav" type="audio/wav"></audio></td>
+            </tr>
             <tr>
               <td rowspan="2" width="28%" style="text-align: center;">Chen Zhang</td>
               <td rowspan="2" width="28%" style="text-align: center;"><p>Rythm Enhancing</p></td>
@@ -324,20 +361,8 @@
               <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/prosody_interpolation/zc/1_en_0.8.wav" type="audio/wav"></audio></td>
             </tr>
             <tr>
-              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/prosody_interpolation/zc/2_en_flat.wav" type="audio/wav"></audio></td>
-              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/prosody_interpolation/zc/2_en_0.8.wav" type="audio/wav"></audio></td>
-            </tr>
-            <tr>
-              <td rowspan="2" width="28%" style="text-align: center;">Ziyue Jiang</td>
-              <td rowspan="2" width="28%" style="text-align: center;"><p>Poem Reading</p></td>
-              <td rowspan="2" width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/prosody_interpolation/jzy/source_prompt.wav" type="audio/wav"></audio></td>
-              <td rowspan="2" width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/prosody_interpolation/jzy/target_prompt.wav" type="audio/wav"></audio></td>
-              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/prosody_interpolation/jzy/1_flat.wav" type="audio/wav"></audio></td>
-              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/prosody_interpolation/jzy/1_0.8.wav" type="audio/wav"></audio></td>
-            </tr>
-            <tr>
-              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/prosody_interpolation/jzy/2_flat.wav" type="audio/wav"></audio></td>
-              <td width="12%" style="text-align: center;"><audio controls="" ><source src="static/audio_sample/prosody_interpolation/jzy/2_0.8.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;border-bottom-width: 1px;"><audio controls="" ><source src="static/audio_sample/prosody_interpolation/zc/2_en_flat.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;border-bottom-width: 1px;"><audio controls="" ><source src="static/audio_sample/prosody_interpolation/zc/2_en_0.8.wav" type="audio/wav"></audio></td>
             </tr>
           </tbody>
         </table>
